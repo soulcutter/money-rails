@@ -99,6 +99,9 @@ module MoneyRails
               end
             end
 
+            # Force dirty because type casting may result in no dirty attribute
+            send("#{subunit_name}_will_change!")
+
             send("#{subunit_name}=", money.try(:cents))
             send("#{instance_currency_name}=", money.try(:currency).try(:iso_code)) if self.respond_to?("#{instance_currency_name}=")
 
